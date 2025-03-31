@@ -20,6 +20,7 @@ optional = true
 pytest = "^8.3.5"
 pytest-mock = "^3.14.0"
 httpx = "^0.28.1"
+coverage = "^7.8.0"
 
 [tool.poetry.group.quality]
 optional = true
