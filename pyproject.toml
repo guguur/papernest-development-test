@@ -60,3 +60,4 @@ addopts = [
 branch = true
 data_file = ".reports/.coverage"
 source = ["app"]
+omit = ["*/__init__.py"]
