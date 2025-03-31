@@ -1,0 +1,10 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /Users/u1113409/Documents/papernest/papernest-development-test/app:/app/app
+    container_name: papernest-address-api
+    ports:
+      - "8005:80"
