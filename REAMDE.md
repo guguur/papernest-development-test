@@ -37,8 +37,7 @@ make down
 #### Installation steps 🛠️
 
 ##### Production
-Make sure to run this in a dedicated python virtual environment, using your favorite virtual
-environment manager:
+Make sure to run this in a dedicated python virtual environment, using your favourite virtual environment manager:
 ```bash
 $ pip install -r requirements.txt
 ```
@@ -46,11 +45,6 @@ If you're familiar with `poetry`, you might consider running instead:
 ```bash
 $ poetry install --no-root
 ```
-It is still recommended to run:
-```bash
-$ pip install -r requirements.txt
-```
-Afterwards to make sure all the required dependencies will be installed.
 
 ##### Development
 Additional development dependencies can be installed. They can be retrieved by running:
@@ -61,14 +55,14 @@ Or again, with `poetry`:
 ```bash
 $ poetry install --with testing,quality --no-root
 ```
-The development dependencies include the testing and quality dependencies. They are used to run the 
-tests and to check the code quality.
+The development dependencies include the testing and quality dependencies. They are used to run the tests and to check the code quality.
 
 #### Launch the API 🚀
 To run the API, you can simply run the following command:
 ```bash
 uvicorn app.main:app --reload --port 8005
 ```
+Similarly to the Docker version, the API will be available at `http://localhost:8005`.
 
 ## Run the tests 🧪
 To run the tests, you have to install the development dependencies as explained in the [Installation steps](#installation-steps-️) section.
