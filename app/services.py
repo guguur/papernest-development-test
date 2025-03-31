@@ -25,7 +25,9 @@ def get_coverage_from_address(
     address : str
         The address to check the coverage.
     antennas_geo_df : gpd.GeoDataFrame
-        The geo dataframe of antennas.
+        The geo dataframe of antennas. It must contain a column for each
+        generation with 1 if the antenna supports the generation, 0 otherwise.
+        It must also contain a column for the operator.
     generations : List[Generation]
         The generations to check the coverage.
     operators : List[Operator]
@@ -60,7 +62,7 @@ def get_coverage_from_address(
 
     client = APIAddressClient()
     x, y = client.get_xy_from_address(address)
-    if x is None:
+    if x is None or y is None:
         return None
 
     return coverage(x, y, antennas_geo_df, generations, operators)
@@ -83,7 +85,9 @@ def coverage(
     y : float
         The y coordinate of the location to check the coverage.
     antennas_geo_df : gpd.GeoDataFrame
-        The geo dataframe of antennas.
+        The geo dataframe of antennas. It must contain a column for each
+        generation with 1 if the antenna supports the generation, 0 otherwise.
+        It must also contain a column for the operator.
     generations : List[Generation]
         The generations to check the coverage.
     operators : List[Operator]
@@ -133,7 +137,7 @@ def coverage(
         coverage = _coverage_of_one_generation(
             x=x,
             y=y,
-            geo_df=antennas_geo_df,
+            antennas_geo_df=antennas_geo_df,
             generation=generation,
             operators=operators,
         )
@@ -145,7 +149,7 @@ def coverage(
 def _coverage_of_one_generation(
     x: float,
     y: float,
-    geo_df: gpd.GeoDataFrame,
+    antennas_geo_df: gpd.GeoDataFrame,
     generation: Generation,
     operators: List[Operator],
 ) -> pd.DataFrame:
@@ -158,8 +162,10 @@ def _coverage_of_one_generation(
         The x coordinate of the location to check the coverage.
     y : float
         The y coordinate of the location to check the coverage.
-    geo_df : gpd.GeoDataFrame
-        The geo dataframe of antennas.
+    antennas_geo_df : gpd.GeoDataFrame
+        The geo dataframe of antennas. It must contain a column for each
+        generation with 1 if the antenna supports the generation, 0 otherwise.
+        It must also contain a column for the operator.
     generation : Generation
         The generation to check the coverage.
     operators : List[Operator]
@@ -186,7 +192,7 @@ def _coverage_of_one_generation(
         geometry=location.buffer(generation.km_coverage * 1000), crs=CRS
     )
     coverage = antenna_range.overlay(
-        geo_df[geo_df[generation] == 1], keep_geom_type=False
+        antennas_geo_df[antennas_geo_df[generation] == 1], keep_geom_type=False
     )
     coverage = coverage.groupby(Columns.OPERATOR)[[generation]].sum()
     coverage = coverage.reindex([op.value for op in operators], fill_value=0)

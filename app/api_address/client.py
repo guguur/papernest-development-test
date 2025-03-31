@@ -26,7 +26,7 @@ class APIAddressClient:
 
         if len(data["features"]) == 0:
             logger.info("No address found for: %s", address)
-            return None
+            return None, None
 
         properties = data["features"][0]["properties"]
         logger.info("Corresponding address found: %s", properties["label"])

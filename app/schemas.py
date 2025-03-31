@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Union
 
 from pydantic import RootModel
 
@@ -8,4 +8,4 @@ class Addresses(RootModel):
 
 
 class NetworkCoverage(RootModel):
-    root: Dict[str, Dict[str, Dict[str, bool]]]
+    root: Dict[str, Union[Dict[str, Dict[str, bool]], None]]

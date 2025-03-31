@@ -1,11 +1,4 @@
-from enum import IntEnum, StrEnum, unique
-
-
-@unique
-class KMCoverage(IntEnum):
-    TWO_G = 30  # km
-    THREE_G = 5  # km
-    FOUR_G = 10  # km
+from enum import StrEnum, unique
 
 
 @unique
@@ -16,13 +9,11 @@ class Generation(StrEnum):
 
     @property
     def km_coverage(self) -> int:
-        return KMCoverage[self.name].value
-
-
-@unique
-class Columns(StrEnum):
-    OPERATOR = "Operateur"
-    GEOMETRY = "geometry"
+        return {
+            Generation.TWO_G: 30,
+            Generation.THREE_G: 5,
+            Generation.FOUR_G: 10,
+        }[self]
 
 
 @unique
@@ -31,6 +22,12 @@ class Operator(StrEnum):
     SFR = "SFR"
     BOUYGUES = "Bouygues"
     FREE = "Free"
+
+
+@unique
+class Columns(StrEnum):
+    OPERATOR = "Operateur"
+    GEOMETRY = "geometry"
 
 
 PROJECTED_COORDINATE_SYSTEM = "EPSG:2154"

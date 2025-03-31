@@ -19,6 +19,7 @@ optional = true
 [tool.poetry.group.testing.dependencies]
 pytest = "^8.3.5"
 pytest-mock = "^3.14.0"
+httpx = "^0.28.1"
 
 [tool.poetry.group.quality]
 optional = true
@@ -53,3 +54,8 @@ addopts = [
     "--verbose",
     "--junit-xml=report.xml",
 ]
+
+[tool.coverage.run]
+branch = true
+data_file = ".reports/.coverage"
+source = ["app"]
