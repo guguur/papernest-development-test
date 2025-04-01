@@ -5,6 +5,9 @@ This package is a simple API that allows you to check the network coverage of a 
 
 - [Papernest API network coverage 📡](#papernest-api-network-coverage-)
   - [Table of contents 📚](#table-of-contents-)
+  - [Environment variables](#environment-variables)
+    - [Mandatory variables](#mandatory-variables)
+    - [Optional variables](#optional-variables)
   - [Run the API 🚀](#run-the-api-)
     - [Through Docker 🐳](#through-docker-)
     - [Locally 🖥️](#locally-️)
@@ -14,6 +17,28 @@ This package is a simple API that allows you to check the network coverage of a 
         - [Development](#development)
       - [Launch the API 🚀](#launch-the-api-)
   - [Run the tests 🧪](#run-the-tests-)
+
+## Environment variables
+
+Create a `.env` file at the root of the backend. This envirenment variables will be used by `app/env.py` and by the docker compose file.
+
+### Mandatory variables
+The variable below is mandatory if you use Docker to run the application. If so, the variable must be set in the `.env` file as follows:
+```
+# path to the directory of the project
+PATH_TO_DIR=/home/Documents/papernest/papernest-development-test
+```
+
+### Optional variables 
+The variables below are optional. Their default values are set in the `app/env.py` file. If you want to change them, they are optional and they can be set in the `.env` file as follows:
+```
+# log level
+LOG_LEVEL=INFO
+# path to the csv file containing the antennas data
+ANTENNAS_DATA_PATH=path_to_antennas_data.csv
+# API address URL
+API_ADDRESS_URL=http://test-api-address.gouv.fr
+```
 
 ## Run the API 🚀
 There are two ways to run the API: through Docker or locally.

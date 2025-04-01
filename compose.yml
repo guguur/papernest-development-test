@@ -4,7 +4,9 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     volumes:
-      - /Users/u1113409/Documents/papernest/papernest-development-test/app:/app/app
+      - ${PATH_TO_DIR}/app:/app/app
     container_name: papernest-address-api
+    env_file:
+      - .env
     ports:
       - "8005:80"

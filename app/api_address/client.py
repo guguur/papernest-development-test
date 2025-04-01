@@ -2,15 +2,14 @@ from typing import Tuple
 
 from requests import Request, Session
 
+from app.env import APP
 from app.logger import logging
-
-API_URL = "https://api-adresse.data.gouv.fr"
 
 logger = logging.getLogger(__name__)
 
 
 class APIAddressClient:
-    def __init__(self, url: str = API_URL):
+    def __init__(self, url: str = APP.API_ADDRESS_URL):
         self.session = Session()
         self.url = url
 
@@ -18,7 +17,7 @@ class APIAddressClient:
         logger.info("Searching for address: %s", address)
 
         request = Request(
-            "GET", f"{API_URL}/search/", params={"q": address, "limit": 1}
+            "GET", f"{self.url}/search/", params={"q": address, "limit": 1}
         )
         prepared_request = self.session.prepare_request(request)
         response = self.session.send(prepared_request)
