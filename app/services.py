@@ -127,6 +127,8 @@ def coverage(
     ------
     ValueError
         If the generation is not supported
+    ValueError
+        If the operator is not supported
     """
 
     for generation in generations:
@@ -159,6 +161,16 @@ def _coverage_of_one_generation(
 ) -> pd.DataFrame:
     """Given a location (x, y) and the geo dataframe of antennas, return the
     coverage of the antennas for the given generation and operators.
+    The coverage is computed by checking if the location is within the range
+    of the antennas supporting the generation. This is done using GeoPandas
+    overlay function to intersect the location with the range of the antennas.
+
+    After methodology comparison, this was the fastest way I found to compute
+    the coverage. The other method was to compute the distance between the
+    location and each antenna and check if the distance is less than the range
+    of the antennas supporting the generation. This method wasn't slow (mean
+    exec. time = 0.39s on 111 iterations) but it was slower than the current
+    method (mean exec. time = 0.23s on 111 iterations).
 
     Parameters
     ----------

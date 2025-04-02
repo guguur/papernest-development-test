@@ -16,6 +16,7 @@ This package is a simple API that allows you to check the network coverage of a 
         - [Production](#production)
         - [Development](#development)
       - [Launch the API 🚀](#launch-the-api-)
+    - [Test the API](#test-the-api)
   - [Run the tests 🧪](#run-the-tests-)
 
 ## Environment variables
@@ -88,6 +89,19 @@ To run the API, you can simply run the following command:
 uvicorn app.main:app --reload --port 8005
 ```
 Similarly to the Docker version, the API will be available at `http://localhost:8005/docs`.
+
+### Test the API
+You can test the API by sending a POST request to the `/coverage` endpoint with the following payload:
+```json
+{
+	"id1" : "157 boulevard Mac Donald 75019 Paris",
+	"id4" : "5 avenue Anatole France 75007 Paris",
+	"id5" : "1 Bd de Parc, 77700 Coupvray",
+	"id6" : "Place d'Armes, 78000 Versailles",
+	"id7" : "17 Rue René Cassin, 51430 Bezannes",
+	"id8" : "78 Le Poujol, 30125 L'Estréchure"
+}
+```
 
 ## Run the tests 🧪
 To run the tests, you have to install the development dependencies as explained in the [Installation steps](#installation-steps-️) section.
