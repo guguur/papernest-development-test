@@ -19,6 +19,7 @@ optional = true
 [tool.poetry.group.testing.dependencies]
 pytest = "^8.3.5"
 pytest-mock = "^3.14.0"
+pytest-env = "^1.1.5"
 httpx = "^0.28.1"
 coverage = "^7.8.0"
 
@@ -54,6 +55,9 @@ known-first-party = ["app"]
 addopts = [
     "--verbose",
     "--junit-xml=report.xml",
+]
+env = [
+    "ANTENNAS_DATA_PATH=tests/resources/antennas.csv"
 ]
 
 [tool.coverage.run]

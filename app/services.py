@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import Dict, List, Union
 
 import geopandas as gpd
 import pandas as pd
@@ -16,7 +16,7 @@ def get_coverage_from_address(
     antennas_geo_df: gpd.GeoDataFrame,
     generations: List[Generation],
     operators: List[Operator],
-) -> Dict[str, Dict[str, bool]]:
+) -> Union[Dict[str, Dict[str, bool]], None]:
     """Given an address and the geo dataframe of antennas, return the coverage
     of the antennas for the given generations and operators.
 
@@ -35,8 +35,10 @@ def get_coverage_from_address(
 
     Returns
     -------
-    Dict[str, Dict[str, bool]]
+    Union[Dict[str, Dict[str, bool]], None]
         The coverage of the antennas for the given generations and operators.
+        If no address found, return None so that the API call doesn't fail
+        especially if there are multiple addresses to check.
         Example:
         {
             "2G": {
@@ -63,6 +65,8 @@ def get_coverage_from_address(
     client = APIAddressClient()
     x, y = client.get_xy_from_address(address)
     if x is None or y is None:
+        # If no address found, return None so that the API call doesn't fail
+        # especially if there are multiple addresses to check
         return None
 
     return coverage(x, y, antennas_geo_df, generations, operators)
