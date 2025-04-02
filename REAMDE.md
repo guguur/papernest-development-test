@@ -103,6 +103,23 @@ You can test the API by sending a POST request to the `/coverage` endpoint with 
 }
 ```
 
+The result should look like this:
+```json
+{
+	"id1" : {
+		"orange": {"2G": true, "3G": true, "4G": false}, 
+		"SFR": {"2G": true, "3G": true, "4G": true},
+		"bouygues": {"2G": true, "3G": true, "4G": false}
+	},
+	"id4" : {
+		"orange": {"2G": true, "3G": true, "4G": false},
+		"bouygues": {"2G": true, "3G": false, "4G": false},
+		"SFR": {"2G": true, "3G": true, "4G": false}
+	}
+	...
+}
+```
+
 ## Run the tests 🧪
 To run the tests, you have to install the development dependencies as explained in the [Installation steps](#installation-steps-️) section.
 
